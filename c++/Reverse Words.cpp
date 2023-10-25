@@ -1,32 +1,51 @@
-//Code, Leetcode QUES with Explanation
-// Problem Link: 
-// https://leetcode.com/problems/reverse-words-in-a-string-iii/solutions/4113212/c-easy-o-n/?envType=daily-question&envId=2023-10-01
-class Solution {
-public:
-    string reverseWords(string s) {
-        int start_of_word=0,end_of_word=0;
-        for(end_of_word;end_of_word<s.length();end_of_word++)
-            if(s[end_of_word]==' '){
-                reverse(s.begin()+start_of_word,s.begin()+end_of_word);
-                start_of_word=end_of_word+1;
-            }
-        reverse(s.begin()+start_of_word,s.begin()+end_of_word);
-        return s;
+amespace std;
+ 
+// Function to reverse the given string
+string reverseString(string str)
+{
+ 
+    // Reverse str using inbuilt function
+    reverse(str.begin(), str.end());
+ 
+    // Add space at the end so that the
+    // last word is also reversed
+    str.insert(str.end(), ' ');
+ 
+    int n = str.length();
+ 
+    int j = 0;
+ 
+    // Find spaces and reverse all words
+    // before that
+    for (int i = 0; i < n; i++) {
+ 
+        // If a space is encountered
+        if (str[i] == ' ') {
+            reverse(str.begin() + j, str.begin() + i);
+ 
+            // Update the starting index
+            // for next word to reverse
+            j = i + 1;
+        }
     }
-};
-
-
-/*
-Intuition
-We can solve this problem by running a loop from0 to s.length()-1 and reversing each word. We can use the reverse() function and maintain two pointers start_of_word and end_of_word. On encountring the " ", reverse the word from start_of_word to end_of_word and update value of start_of_word to end_of_word+1.
-
-Approach
-Take two variables start_of_word and end_of_word with initial values of 0 for both. Run a loop from 0 to s.length()-1, if there is a space character i.e. s[end_of_word]==' ' then we will reverse the string from start_of_word to end_of_word and update the value of start_of_word to end_of_word+1. After completing the all words of string s has been reversed except the last one. so we will again reverse the string form start_of_word to end_of_word ans then simply return strings.
-
-Complexity
-Time complexity:
-O(n)
-
-Space complexity:
-O(1)
-*/
+ 
+    // Remove spaces from the end of the
+    // word that we appended
+    str.pop_back();
+ 
+    // Return the reversed string
+    return str;
+}
+ 
+// Driver code
+int main()
+{
+    string str = "I like this code";
+ 
+    // Function call
+    string rev = reverseString(str);
+ 
+    // Print the reversed string
+    cout << rev;
+    return 0;
+}
